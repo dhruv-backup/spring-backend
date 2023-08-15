@@ -23,58 +23,46 @@ import com.example.demo.repository.CustomerRepository;
 @RestController
 @RequestMapping("/api/v1/")
 public class CustomerController {
-	
+
 	@Autowired
 	private CustomerRepository customerRepository;
-	
-	//get all customers
-	
+
+	// get all customers
+
 	@GetMapping("/customers")
-	public List<Customer> getAllCustomers(){
+	public List<Customer> getAllCustomers() {
 		return customerRepository.findAll();
 	}
-	
+
 	@PostMapping("/sendCustomer")
-	public Customer createCustomer(@Validated @RequestBody Customer newCustomer)
-	{
+	public Customer createCustomer(@Validated @RequestBody Customer newCustomer) {
 		return customerRepository.save(newCustomer);
 	}
-	
+
 	@PutMapping("/updateCustomer/{id}")
-	public ResponseEntity<Customer> updateCustomer(@PathVariable(value="id") Long userID, @Validated @RequestBody Customer newCustomer) throws ResourceNotFoundException
-	{
-		Customer updatedCustomer = customerRepository.findById(userID).orElseThrow(()-> new ResourceNotFoundException("Customer is not avaiable:"+ userID));
+	public ResponseEntity<Customer> updateCustomer(@PathVariable(value = "id") String userID,
+			@Validated @RequestBody Customer newCustomer) throws ResourceNotFoundException {
+		Customer updatedCustomer = customerRepository.findById(userID)
+				.orElseThrow(() -> new ResourceNotFoundException("Customer is not avaiable:" + userID));
 		updatedCustomer.setFirstName(newCustomer.getFirstName());
 		updatedCustomer.setLastName(newCustomer.getLastName());
 		updatedCustomer.setAddress(newCustomer.getAddress());
 		updatedCustomer.setContactNo(newCustomer.getContactNo());
 		updatedCustomer.setDOB(newCustomer.getDOB());
 		customerRepository.save(updatedCustomer);
-		
+
 		return ResponseEntity.ok(updatedCustomer);
 	}
-	
+
 	@DeleteMapping("/deleteCustomer/{id}")
-	public Map<String, Boolean> deleteCustomer(@PathVariable(value="id") Long userID) throws ResourceNotFoundException {
-		Customer updatedCustomer = customerRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("Customer is not Available:"+ userID));
+	public Map<String, Boolean> deleteCustomer(@PathVariable(value = "id") String userID)
+			throws ResourceNotFoundException {
+		Customer updatedCustomer = customerRepository.findById(userID)
+				.orElseThrow(() -> new ResourceNotFoundException("Customer is not Available:" + userID));
 		customerRepository.delete(updatedCustomer);
-		Map<String,Boolean> response = new HashMap<>();
+		Map<String, Boolean> response = new HashMap<>();
 		response.put("Customer has been Deleted", Boolean.TRUE);
 		return response;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
