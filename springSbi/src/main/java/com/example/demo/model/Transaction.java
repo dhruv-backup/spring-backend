@@ -2,6 +2,8 @@ package com.example.demo.model;
 
 import java.sql.Date;
 
+// import java.sql.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,14 +27,14 @@ public class Transaction {
 	@Column(name="TransactionDetails")
 	private String TransactionDetails;
 	@Column(name="TransDate")
-	private String TransDate;
+	private Date TransDate;
 	
 	public Transaction() {
 		
 	}
 	
 	public Transaction(long senderAccNo, long receiverAccNo, double amount, String transactionDetails,
-			String transDate) {
+			Date transDate) {
 		super();
 		SenderAccNo = senderAccNo;
 		ReceiverAccNo = receiverAccNo;
@@ -72,10 +74,10 @@ public class Transaction {
 	public void setTransactionDetails(String transactionDetails) {
 		TransactionDetails = transactionDetails;
 	}
-	public String getTransDate() {
+	public Date getTransDate() {
 		return TransDate;
 	}
-	public void setTransDate(String transDate) {
+	public void setTransDate(Date transDate) {
 		TransDate =transDate;
 		
 	}

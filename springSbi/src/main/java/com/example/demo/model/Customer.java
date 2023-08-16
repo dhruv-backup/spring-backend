@@ -1,47 +1,40 @@
 package com.example.demo.model;
 
+import java.sql.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+// import jakarta.persistence.GeneratedValue;
+// import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Email;
 
 @Entity
 @Table(name = "user")
 public class Customer {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long CustomerID;
+	private String CustomerID;
 	
-	@NotBlank(message = "Name is mandatory")
-	@Column(name="FirstName")
+	@Column(name="FirstName", nullable=false)
 	private String FirstName;
 	
-	@NotBlank(message = "Name is mandatory")
-	@Column(name="LastName")
+	@Column(name="LastName", nullable=false)
 	private String LastName;
 	
-	@NotBlank(message = "Name is mandatory")
-	@Column(name="Password")
+	@Column(name="Password", nullable=false)
 	private String Password;
 	
-	@Column(name="Address")
+	@Column(name="Address", nullable=false)
 	private String Address;
 	
-	@NotBlank(message = "Name is mandatory")
-	@Column(name="DOB")
-	private int DOB;
+	@Column(name="DOB" , nullable=false)
+	private Date DOB;
 	
-	@NotBlank(message = "Name is mandatory")
-	@Column(name="ContactNo")
+	@Column(name="ContactNo", nullable=false)
 	private String ContactNo;
 	
-	@Email(message = "Email is not valid", regexp="{(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])}")
-	@Column(name="Email")
+	@Column(name="Email", nullable=false)
 	private String Email;
 	
 	//Default constructor
@@ -52,11 +45,11 @@ public class Customer {
 	//Parameterised
 	
 
-	public long getCustomerID() {
+	public String getCustomerID() {
 		return CustomerID;
 	}
 
-	public Customer(String firstName, String lastName, String password, String address, int dOB, String contactNo,
+	public Customer(String firstName, String lastName, String password, String address, Date dOB, String contactNo,
 			String email) {
 		super();
 		FirstName = firstName;
@@ -68,7 +61,7 @@ public class Customer {
 		Email = email;
 	}
 
-	public void setCustomerID(long customerID) {
+	public void setCustomerID(String customerID) {
 		CustomerID = customerID;
 	}
 
@@ -104,11 +97,11 @@ public class Customer {
 		Address = address;
 	}
 
-	public int getDOB() {
+	public Date getDOB() {
 		return DOB;
 	}
 
-	public void setDOB(int dOB) {
+	public void setDOB(Date dOB) {
 		DOB = dOB;
 	}
 
