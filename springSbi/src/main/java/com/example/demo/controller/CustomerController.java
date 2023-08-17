@@ -40,22 +40,19 @@ public class CustomerController {
 	}
 
 	@PutMapping("/updateCustomer/{id}")
-	public ResponseEntity<Customer> updateCustomer(@PathVariable(value = "id") String userID,
+	public ResponseEntity<Customer> updateCustomer(@PathVariable(value = "id") Long userID,
 			@Validated @RequestBody Customer newCustomer) throws ResourceNotFoundException {
 		Customer updatedCustomer = customerRepository.findById(userID)
 				.orElseThrow(() -> new ResourceNotFoundException("Customer is not avaiable:" + userID));
-		updatedCustomer.setFirstName(newCustomer.getFirstName());
-		updatedCustomer.setLastName(newCustomer.getLastName());
-		updatedCustomer.setAddress(newCustomer.getAddress());
-		updatedCustomer.setContactNo(newCustomer.getContactNo());
-		updatedCustomer.setDOB(newCustomer.getDOB());
+		updatedCustomer.setPassword(newCustomer.getPassword());
+		updatedCustomer.setTransactionPassword(newCustomer.getTransactionPassword());
 		customerRepository.save(updatedCustomer);
 
 		return ResponseEntity.ok(updatedCustomer);
 	}
 
 	@DeleteMapping("/deleteCustomer/{id}")
-	public Map<String, Boolean> deleteCustomer(@PathVariable(value = "id") String userID)
+	public Map<String, Boolean> deleteCustomer(@PathVariable(value = "id") Long userID)
 			throws ResourceNotFoundException {
 		Customer updatedCustomer = customerRepository.findById(userID)
 				.orElseThrow(() -> new ResourceNotFoundException("Customer is not Available:" + userID));
