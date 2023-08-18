@@ -29,7 +29,7 @@ public class BeneficiaryController {
 
 	// get all beneficiarys
 
-	@GetMapping("/beneficiarys")
+	@GetMapping("/beneficiaries")
 	public List<Beneficiary> getAllBeneficiarys() {
 		return beneficiaryRepository.findAll();
 	}

@@ -13,46 +13,46 @@ import jakarta.persistence.Table;
 @Table(name = "accountHolders")
 public class User {
     @Id
-    private String CustomerID;
+    private String customerID;
 
-    @Column(name = "FirstName")
-    private String FirstName;
+    @Column(name = "firstName")
+    private String firstName;
 
-    @Column(name = "AccountNo")
-    private String AccountNo;
+    @Column(name = "accountNo")
+    private String accountNo;
 
-    @Column(name = "LastName")
-    private String LastName;
+    @Column(name = "lastName")
+    private String lastName;
 
-    @Column(name = "MiddleName")
-    private String MiddleName;
+    @Column(name = "middleName")
+    private String middleName;
 
-    @Column(name = "CurrentAddress")
-    private String CurrentAddress;
+    @Column(name = "currentAddress")
+    private String currentAddress;
 
-    @Column(name = "PermanentAddress")
-    private String PermanentAddress;
+    @Column(name = "permanentAddress")
+    private String permanentAddress;
 
-    @Column(name = "DOB")
-    private Date DOB;
+    @Column(name = "dob")
+    private Date dob;
 
-    @Column(name = "ContactNo")
-    private String ContactNo;
+    @Column(name = "contactNo")
+    private String contactNo;
 
-    @Column(name = "Email")
-    private String Email;
+    @Column(name = "email")
+    private String email;
 
-    @Column(name = "AadharNo")
-    private String AadharNo;
+    @Column(name = "aadharNo")
+    private String aadharNo;
 
-    @Column(name = "PanNo")
-    private String PanNo;
+    @Column(name = "panNo")
+    private String panNo;
 
-    @Column(name = "Occupation")
-    private String Occupation;
+    @Column(name = "occupation")
+    private String occupation;
 
-    @Column(name = "MinAccountBalance")
-    private double MinAccountBalance;
+    @Column(name = "minAccountBalance")
+    private double minAccountBalance;
 
     public User() {
     }
@@ -61,141 +61,132 @@ public class User {
             String PermanentAddress, Date DOB, String ContactNo, String Email, String AadharNo, String PanNo,
             String Occupation, double MinAccountBalance) {
         super();
-        this.CustomerID = CustomerID;
-        this.FirstName = FirstName;
-        this.LastName = LastName;
-        this.AccountNo = AccountNo;
-        this.MiddleName = MiddleName;
-        this.CurrentAddress = CurrentAddress;
-        this.PermanentAddress = PermanentAddress;
-        this.DOB = DOB;
-        this.ContactNo = ContactNo;
-        this.Email = Email;
-        this.AadharNo = AadharNo;
-        this.PanNo = PanNo;
-        this.Occupation = Occupation;
-        this.MinAccountBalance = MinAccountBalance;
+        this.customerID = CustomerID;
+        this.firstName = FirstName;
+        this.lastName = LastName;
+        this.accountNo = AccountNo;
+        this.middleName = MiddleName;
+        this.currentAddress = CurrentAddress;
+        this.permanentAddress = PermanentAddress;
+        this.dob = DOB;
+        this.contactNo = ContactNo;
+        this.email = Email;
+        this.aadharNo = AadharNo;
+        this.panNo = PanNo;
+        this.occupation = Occupation;
+        this.minAccountBalance = MinAccountBalance;
     }
 
     public String getCustomerID() {
-        return CustomerID;
+        return customerID;
     }
 
     public void setCustomerID(String CustomerID) {
-        this.CustomerID = CustomerID;
+        this.customerID = CustomerID;
     }
 
     public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
 
     public void setFirstName(String FirstName) {
-        this.FirstName = FirstName;
+        this.firstName = FirstName;
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String LastName) {
-        this.LastName = LastName;
+        this.lastName = LastName;
     }
 
     public String getAccountNo() {
-        return AccountNo;
+        return accountNo;
     }
 
     public void setAccountNo(String AccountNo) {
-        this.AccountNo = AccountNo;
+        this.accountNo = AccountNo;
     }
 
     public String getMiddleName() {
-        return MiddleName;
+        return middleName;
     }
 
     public void setMiddleName(String MiddleName) {
-        this.MiddleName = MiddleName;
+        this.middleName = MiddleName;
     }
 
     public String getCurrentAddress() {
-        return CurrentAddress;
+        return currentAddress;
     }
 
     public void setCurrentAddress(String CurrentAddress) {
-        this.CurrentAddress = CurrentAddress;
+        this.currentAddress = CurrentAddress;
     }
 
     public String getPermanentAddress() {
-        return PermanentAddress;
+        return permanentAddress;
     }
 
     public void setPermanentAddress(String PermanentAddress) {
-        this.PermanentAddress = PermanentAddress;
+        this.permanentAddress = PermanentAddress;
     }
 
     public Date getDOB() {
-        return DOB;
+        return dob;
     }
 
     public void setDOB(Date DOB) {
-        this.DOB = DOB;
+        this.dob = DOB;
     }
 
     public String getContactNo() {
-        return ContactNo;
+        return contactNo;
     }
 
     public void setContactNo(String ContactNo) {
-        this.ContactNo = ContactNo;
+        this.contactNo = ContactNo;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String Email) {
-        this.Email = Email;
+        this.email = Email;
     }
 
     public String getAadharNo() {
-        return AadharNo;
+        return aadharNo;
     }
 
     public void setAadharNo(String AadharNo) {
-        this.AadharNo = AadharNo;
+        this.aadharNo = AadharNo;
     }
 
     public String getPanNo() {
-        return PanNo;
+        return panNo;
     }
 
     public void setPanNo(String PanNo) {
-        this.PanNo = PanNo;
+        this.panNo = PanNo;
     }
 
     public String getOccupation() {
-        return Occupation;
+        return occupation;
     }
 
     public void setOccupation(String Occupation) {
-        this.Occupation = Occupation;
+        this.occupation = Occupation;
     }
 
     public double getMinAccountBalance() {
-        return MinAccountBalance;
+        return minAccountBalance;
     }
 
     public void setMinAccountBalance(double MinAccountBalance) {
-        this.MinAccountBalance = MinAccountBalance;
-    }
-
-    @Override
-    public String toString() {
-        return "User [CustomerID=" + CustomerID + ", FirstName=" + FirstName + ", LastName=" + LastName
-                + ", MiddleName=" + MiddleName + ", CurrentAddress=" + CurrentAddress + ", PermanentAddress="
-                + PermanentAddress + ", DOB=" + DOB + ", ContactNo=" + ContactNo + ", Email=" + Email + ", AadharNo="
-                + AadharNo + ", PanNo=" + PanNo + ", Occupation=" + Occupation + ", MinAccountBalance="
-                + MinAccountBalance + "]";
+        this.minAccountBalance = MinAccountBalance;
     }
 
 }

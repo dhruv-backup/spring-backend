@@ -16,13 +16,13 @@ import jakarta.persistence.Table;
 
 public class Beneficiary {
     @Id
-    private String AccountNo;
-    @Column(name = "ReceiverAccNo")
-    private long ReceiverAccNo;
-    @Column(name = "Nickname")
-    private double Nickname;
-    @Column(name = "Name")
-    private String Name;
+    private String accountNo;
+    @Column(name = "receiverAccNo")
+    private long receiverAccNo;
+    @Column(name = "nickname")
+    private double nickname;
+    @Column(name = "name")
+    private String name;
 
     public Beneficiary() {
 
@@ -30,42 +30,42 @@ public class Beneficiary {
 
     public Beneficiary(String accountNo, long receiverAccNo, double nickname, String name) {
         super();
-        AccountNo = accountNo;
-        ReceiverAccNo = receiverAccNo;
-        Nickname = nickname;
-        Name = name;
+        this.accountNo = accountNo;
+        this.receiverAccNo = receiverAccNo;
+        this.nickname = nickname;
+        this.name = name;
 
     }
 
     public String getAccountNo() {
-        return AccountNo;
+        return accountNo;
     }
 
     public void setAccountNo(String accountNo) {
-        this.AccountNo = accountNo;
+        this.accountNo = accountNo;
     }
 
     public long getReceiverAccNo() {
-        return ReceiverAccNo;
+        return receiverAccNo;
     }
 
     public void setReceiverAccNo(long receiverAccNo) {
-        this.ReceiverAccNo = receiverAccNo;
+        this.receiverAccNo = receiverAccNo;
     }
 
     public double getNickname() {
-        return Nickname;
+        return nickname;
     }
 
     public void setNickname(double nickname) {
-        this.Nickname = nickname;
+        this.nickname = nickname;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        this.Name = name;
+        this.name = name;
     }
 }

@@ -7,5 +7,5 @@ import com.example.demo.model.Customer;
 
 @Repository 
 public interface CustomerRepository extends JpaRepository<Customer,Long>{
-	
+	public Customer findByCustomerID(String CustomerID);
 }

@@ -19,14 +19,14 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name="CustomerID", nullable=false)
-	private String CustomerID;
+	@Column(name="customerID", nullable=false)
+	private String customerID;
 	
-	@Column(name="Password", nullable=false)
-	private String Password;
+	@Column(name="password", nullable=false)
+	private String password;
 
-	@Column(name="TransactionPassword", nullable=false)
-	private String TransactionPassword;
+	@Column(name="transactionPassword", nullable=false)
+	private String transactionPassword;
 	
 	//Default constructor
 	public Customer() {
@@ -37,7 +37,7 @@ public class Customer {
 	
 
 	public String getCustomerID() {
-		return CustomerID;
+		return customerID;
 	}
 
 	public Long getID() {
@@ -46,14 +46,14 @@ public class Customer {
 
 	public Customer(long id, String password, String CustomerID, String TransactionPassword) {
 		super();		
-		Password = password;
-		this.TransactionPassword = TransactionPassword;
+		this.password = password;
+		this.transactionPassword = TransactionPassword;
 		this.id = id;
-		this.CustomerID = CustomerID;
+		this.customerID = CustomerID;
 	}
 
 	public void setCustomerID(String customerID) {
-		CustomerID = customerID;
+		this.customerID = customerID;
 	}
 
 	public void setID(Long ID) {
@@ -63,19 +63,19 @@ public class Customer {
 	
 
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
 
 	public String getTransactionPassword() {
-		return TransactionPassword;
+		return transactionPassword;
 	}
 
 	public void setTransactionPassword(String Transactionpassword) {
-		TransactionPassword = Transactionpassword;
+		transactionPassword = Transactionpassword;
 	}
 	
 	//getter-setter

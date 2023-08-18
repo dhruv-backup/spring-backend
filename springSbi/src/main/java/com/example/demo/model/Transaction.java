@@ -17,17 +17,17 @@ import jakarta.persistence.Table;
 public class Transaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long TransactionID;
-	@Column(name="SenderAccNo")
-	private long SenderAccNo;
-	@Column(name="ReceiverAccNo")
-	private long ReceiverAccNo;
-	@Column(name="Amount")
-	private double Amount;
+	private long transactionID;
+	@Column(name="senderAccNo")
+	private long senderAccNo;
+	@Column(name="receiverAccNo")
+	private long receiverAccNo;
+	@Column(name="amount")
+	private double amount;
 	@Column(name="TransactionDetails")
-	private String TransactionDetails;
-	@Column(name="TransDate")
-	private Date TransDate;
+	private String transactionDetails;
+	@Column(name="transDate")
+	private Date transDate;
 	
 	public Transaction() {
 		
@@ -36,49 +36,49 @@ public class Transaction {
 	public Transaction(long senderAccNo, long receiverAccNo, double amount, String transactionDetails,
 			Date transDate) {
 		super();
-		SenderAccNo = senderAccNo;
-		ReceiverAccNo = receiverAccNo;
-		Amount = amount;
-		TransactionDetails = transactionDetails;
-		TransDate=transDate;
+		this.senderAccNo = senderAccNo;
+		this.receiverAccNo = receiverAccNo;
+		this.amount = amount;
+		this.transactionDetails = transactionDetails;
+		this.transDate=transDate;
 		
 	}
 	
 	public long getTransactionID() {
-		return TransactionID;
+		return transactionID;
 	}
 	public void setTransactionID(long transactionID) {
-		TransactionID = transactionID;
+		this.transactionID = transactionID;
 	}
 	public long getSenderAccNo() {
-		return SenderAccNo;
+		return senderAccNo;
 	}
 	public void setSenderAccNo(long senderAccNo) {
-		SenderAccNo = senderAccNo;
+		this.senderAccNo = senderAccNo;
 	}
 	public long getReceiverAccNo() {
-		return ReceiverAccNo;
+		return receiverAccNo;
 	}
 	public void setReceiverAccNo(long receiverAccNo) {
-		ReceiverAccNo = receiverAccNo;
+		this.receiverAccNo = receiverAccNo;
 	}
 	public double getAmount() {
-		return Amount;
+		return amount;
 	}
 	public void setAmount(double amount) {
-		Amount = amount;
+		this.amount = amount;
 	}
 	public String getTransactionDetails() {
-		return TransactionDetails;
+		return transactionDetails;
 	}
 	public void setTransactionDetails(String transactionDetails) {
-		TransactionDetails = transactionDetails;
+		this.transactionDetails = transactionDetails;
 	}
 	public Date getTransDate() {
-		return TransDate;
+		return transDate;
 	}
 	public void setTransDate(Date transDate) {
-		TransDate =transDate;
+		this.transDate =transDate;
 		
 	}
 	
