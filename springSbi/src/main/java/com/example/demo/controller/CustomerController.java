@@ -18,10 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.model.Authentication;
 import com.example.demo.model.Customer;
 import com.example.demo.repository.CustomerRepository;
 
-@CrossOrigin("http://localhost:3000/")
+@CrossOrigin("http://localhost:3000")
 @RestController
 @RequestMapping("/api/v1/")
 public class CustomerController {
@@ -34,6 +35,21 @@ public class CustomerController {
 	@GetMapping("/customers")
 	public List<Customer> getAllCustomers() {
 		return customerRepository.findAll();
+	}
+
+	@PostMapping("/login")
+	public String verifyCustomer(@Validated @RequestBody Authentication customer) {
+		Customer val = customerRepository.findByCustomerID(customer.getCustomerID());
+		if (val.getPassword().equals(customer.getPassword())) {
+			return "1: Credentials Validated Successfully";
+		} else {
+			return "0: Credentials Validation Failed";
+		}
+	}
+
+	@GetMapping("/customer/{cid}")
+	public Customer getACustomers(@PathVariable(value = "cid") String cid) throws ResourceNotFoundException {
+		return customerRepository.findByCustomerID(cid);
 	}
 
 	@PostMapping("/sendCustomer")

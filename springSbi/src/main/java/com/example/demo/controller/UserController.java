@@ -42,11 +42,10 @@ public class UserController {
                 .orElseThrow(() -> new ResourceNotFoundException("User is not Available:" + userID));
     }
 
-    @GetMapping("/userid/{cid}")
+    @GetMapping("/get/user/{cid}")
     public User getACustomersbyCID(@PathVariable(value = "cid") String cid) throws ResourceNotFoundException {
         return userRepository.findByCustomerID(cid);
     }
-    
 
     @PostMapping("/sendUser")
     public User createCustomer(@Validated @RequestBody User newUser) {
