@@ -37,6 +37,18 @@ public class TransactionController {
 		
 		return transactionRepository.findAll();
 	}
+
+	@GetMapping("/transactions/debit/{accno}")
+	public List<Transaction> getAllOutgoingTransactions(@PathVariable(value="accno") String accno){
+		
+		return transactionRepository.findBySenderAccNo(accno);
+	}
+
+	@GetMapping("/transactions/credit/{accno}")
+	public List<Transaction> getAllIncomingTransactions(@PathVariable(value="accno") String accno){
+		
+		return transactionRepository.findByReceiverAccNo(accno);
+	}
 	
 	@PostMapping("/sendTransaction")
 	public Transaction createTransaction(@Validated @RequestBody Transaction newTransaction) {
@@ -52,7 +64,7 @@ public class TransactionController {
 	updatedTransaction.setSenderAccNo(newTransaction.getSenderAccNo());
 	updatedTransaction.setReceiverAccNo(newTransaction.getReceiverAccNo());
 	updatedTransaction.setAmount(newTransaction.getAmount());
-	updatedTransaction.setTransactionDetails(newTransaction.getTransactionDetails());
+	updatedTransaction.setTransactionType(newTransaction.getTransactionType());
 	updatedTransaction.setTransDate(newTransaction.getTransDate());
 	transactionRepository.save(updatedTransaction);
 return ResponseEntity.ok(updatedTransaction);

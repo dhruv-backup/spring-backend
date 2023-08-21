@@ -54,6 +54,8 @@ public class User {
     @Column(name = "minAccountBalance")
     private double minAccountBalance;
 
+    private boolean isActive;
+
     public User() {
     }
 
@@ -75,6 +77,7 @@ public class User {
         this.panNo = PanNo;
         this.occupation = Occupation;
         this.minAccountBalance = MinAccountBalance;
+        this.isActive = false;
     }
 
     public String getCustomerID() {
@@ -187,6 +190,16 @@ public class User {
 
     public void setMinAccountBalance(double MinAccountBalance) {
         this.minAccountBalance = MinAccountBalance;
+    }
+
+    public void setIsActive(boolean isActive)
+    {
+        this.isActive = isActive;
+    }
+
+    public boolean getIsActive()
+    {
+        return this.isActive;
     }
 
 }

@@ -18,9 +18,9 @@ public class Beneficiary {
     @Id
     private String accountNo;
     @Column(name = "receiverAccNo")
-    private long receiverAccNo;
+    private String receiverAccNo;
     @Column(name = "nickname")
-    private double nickname;
+    private String nickname;
     @Column(name = "name")
     private String name;
 
@@ -28,7 +28,7 @@ public class Beneficiary {
 
     }
 
-    public Beneficiary(String accountNo, long receiverAccNo, double nickname, String name) {
+    public Beneficiary(String accountNo, String receiverAccNo, String nickname, String name) {
         super();
         this.accountNo = accountNo;
         this.receiverAccNo = receiverAccNo;
@@ -45,19 +45,19 @@ public class Beneficiary {
         this.accountNo = accountNo;
     }
 
-    public long getReceiverAccNo() {
+    public String getReceiverAccNo() {
         return receiverAccNo;
     }
 
-    public void setReceiverAccNo(long receiverAccNo) {
+    public void setReceiverAccNo(String receiverAccNo) {
         this.receiverAccNo = receiverAccNo;
     }
 
-    public double getNickname() {
+    public String getNickname() {
         return nickname;
     }
 
-    public void setNickname(double nickname) {
+    public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 

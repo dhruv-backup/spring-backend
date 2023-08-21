@@ -18,70 +18,82 @@ public class Transaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long transactionID;
-	@Column(name="senderAccNo")
-	private long senderAccNo;
-	@Column(name="receiverAccNo")
-	private long receiverAccNo;
-	@Column(name="amount")
+	@Column(name = "senderAccNo")
+	private String senderAccNo;
+	@Column(name = "receiverAccNo")
+	private String receiverAccNo;
+	@Column(name = "amount")
 	private double amount;
-	@Column(name="TransactionDetails")
-	private String transactionDetails;
-	@Column(name="transDate")
+	@Column(name = "transactionType")
+	private String transactionType;
+	@Column(name = "message")
+	private String message;
+	@Column(name = "transDate")
 	private Date transDate;
-	
+
 	public Transaction() {
-		
+
 	}
-	
-	public Transaction(long senderAccNo, long receiverAccNo, double amount, String transactionDetails,
-			Date transDate) {
+
+	public Transaction(String senderAccNo, String receiverAccNo, double amount, String transactionType,
+			String msg, Date transDate) {
 		super();
 		this.senderAccNo = senderAccNo;
 		this.receiverAccNo = receiverAccNo;
 		this.amount = amount;
-		this.transactionDetails = transactionDetails;
-		this.transDate=transDate;
-		
+		this.transactionType = transactionType;
+		message = msg;
+		this.transDate = transDate;
+
 	}
-	
+
 	public long getTransactionID() {
 		return transactionID;
 	}
+
 	public void setTransactionID(long transactionID) {
 		this.transactionID = transactionID;
 	}
-	public long getSenderAccNo() {
+
+	public String getSenderAccNo() {
 		return senderAccNo;
 	}
-	public void setSenderAccNo(long senderAccNo) {
+
+	public void setSenderAccNo(String senderAccNo) {
 		this.senderAccNo = senderAccNo;
 	}
-	public long getReceiverAccNo() {
+
+	public String getReceiverAccNo() {
 		return receiverAccNo;
 	}
-	public void setReceiverAccNo(long receiverAccNo) {
+
+	public void setReceiverAccNo(String receiverAccNo) {
 		this.receiverAccNo = receiverAccNo;
 	}
+
 	public double getAmount() {
 		return amount;
 	}
+
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	public String getTransactionDetails() {
-		return transactionDetails;
+
+	public String getTransactionType() {
+		return transactionType;
 	}
-	public void setTransactionDetails(String transactionDetails) {
-		this.transactionDetails = transactionDetails;
+
+	public void setTransactionType(String transactionDetails) {
+		this.transactionType = transactionDetails;
 	}
+
 	public Date getTransDate() {
 		return transDate;
 	}
+
 	public void setTransDate(Date transDate) {
-		this.transDate =transDate;
-		
+		this.transDate = transDate;
+
 	}
-	
-	
 
 }
