@@ -96,4 +96,20 @@ public class Transaction {
 
 	}
 
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String msg) {
+		message = msg;
+	}
+
+	public Date getDate() {
+		return transDate;
+	}
+
+	public void setDate(Date date) {
+		transDate = date;
+	}
+
 }

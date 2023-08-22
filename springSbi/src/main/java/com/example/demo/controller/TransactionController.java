@@ -1,11 +1,12 @@
 package com.example.demo.controller;
 import java.util.List;
-
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Transaction;
 import com.example.demo.repository.TransactionRepository;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1")
 public class TransactionController {
@@ -36,6 +38,13 @@ public class TransactionController {
 	public List<Transaction> getAllTransactions(){
 		
 		return transactionRepository.findAll();
+	}
+
+
+	@GetMapping("/transaction/{date1}/{date2}/{acno}")
+	public List<Transaction> getTransactionsByDate(@PathVariable(value="date1") Date date1,@PathVariable(value="date2") Date date2,@PathVariable(value="acno") String acno) throws ResourceNotFoundException{
+		
+		return transactionRepository.findByReceiverAccNoOrSenderAccNo(date1,date2,acno);
 	}
 
 	@GetMapping("/transactions/debit/{accno}")
@@ -69,8 +78,7 @@ public class TransactionController {
 	transactionRepository.save(updatedTransaction);
 return ResponseEntity.ok(updatedTransaction);
 
-	}
-	
+	}	
 		
 	
 	@DeleteMapping("/deleteTransaction/{id}")

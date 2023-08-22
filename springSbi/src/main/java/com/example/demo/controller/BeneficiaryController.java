@@ -41,6 +41,12 @@ public class BeneficiaryController {
 		return beneficiaryRepository.save(newBeneficiary);
 	}
 
+	@GetMapping("/beneficiary/{id}")
+	public List<Beneficiary> getBeneficiariesByaccountNo(@PathVariable(value = "id") String accountNo)
+			throws ResourceNotFoundException {
+		return beneficiaryRepository.findByAccountNo(accountNo);
+	}
+
 	@PutMapping("/updateBeneficiary/{id}")
 	public ResponseEntity<Beneficiary> updateBeneficiary(@PathVariable(value = "id") String userID,
 			@Validated @RequestBody Beneficiary newBeneficiary) throws ResourceNotFoundException {
