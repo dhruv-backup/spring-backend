@@ -47,6 +47,11 @@ public class AccountHolderController {
         return userRepository.findByCustomerID(cid);
     }
 
+    @GetMapping("/getbyaccno/{cid}")
+    public AccountHolder getACustomerByAccNo(@PathVariable(value = "cid") String cid) throws ResourceNotFoundException {
+        return userRepository.findByAccountNo(cid);
+    }
+
     @PostMapping("/sendUser")
     public AccountHolder createCustomer(@Validated @RequestBody AccountHolder newUser) {
         return userRepository.save(newUser);
@@ -104,10 +109,11 @@ public class AccountHolderController {
     }
 
     @PutMapping("/makeActive/{id}")
-    public ResponseEntity<AccountHolder> makeActiveUser(@PathVariable(value = "id") String userID) throws ResourceNotFoundException {
+    public ResponseEntity<AccountHolder> makeActiveUser(@PathVariable(value = "id") String userID)
+            throws ResourceNotFoundException {
         AccountHolder updatedCustomer = userRepository.findById(userID)
                 .orElseThrow(() -> new ResourceNotFoundException("User is not avaiable:" + userID));
-                updatedCustomer.setIsActive(true);
+        updatedCustomer.setIsActive(true);
         userRepository.save(updatedCustomer);
 
         return ResponseEntity.ok(updatedCustomer);

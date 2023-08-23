@@ -20,7 +20,6 @@ import com.example.demo.security.JwtAuthenticationFilter;
 @Configuration
 public class SecurityConfig {
 
-
     @Autowired
     private JwtAuthenticationEntryPoint point;
     @Autowired
@@ -36,10 +35,14 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(requests -> requests.
-                        requestMatchers("/home").authenticated().requestMatchers("/auth/register").permitAll().requestMatchers("/auth/login").permitAll()
+                .authorizeHttpRequests(requests -> requests.requestMatchers("/home").authenticated()
+                        .requestMatchers("/**").permitAll()
+                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/api/v1/get/user/**").permitAll()
+                        .requestMatchers("/api/v1/sendUser").permitAll()
                         .anyRequest()
-                        .authenticated()).exceptionHandling(ex -> ex.authenticationEntryPoint(point))
+                        .authenticated())
+                .exceptionHandling(ex -> ex.authenticationEntryPoint(point))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

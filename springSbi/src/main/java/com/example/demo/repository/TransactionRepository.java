@@ -16,7 +16,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     public List<Transaction> findByReceiverAccNo(String receiverAccNo);
 
     // Find rows between two date values
-    @Query("SELECT t FROM Transaction t WHERE t.senderAccNo=?3 OR t.receiverAccNo=?3 AND t.transDate BETWEEN ?1 AND ?2")
+    @Query("SELECT t FROM Transaction t WHERE t.transDate BETWEEN ?1 AND ?2 AND (t.senderAccNo=?3 OR t.receiverAccNo=?3)")
     public List<Transaction> findByReceiverAccNoOrSenderAccNo(Date startDate, Date endDate, String accno);
 
 }
