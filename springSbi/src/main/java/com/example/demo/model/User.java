@@ -1,23 +1,36 @@
 package com.example.demo.model;
 
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 // import java.sql.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 // import jakarta.persistence.GeneratedValue;
 // import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@ToString
 @Entity
 @Table(name = "Credentials")
-public class User {
+public class User implements UserDetails{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private String id;
 
 	@Column(name="customerID", nullable=false)
 	private String customerID;
@@ -27,56 +40,86 @@ public class User {
 
 	@Column(name="transactionPassword", nullable=false)
 	private String transactionPassword;
-	
-	//Default constructor
-	public User() {
-		
-	}
-	
-	//Parameterised
-	
 
-	public String getCustomerID() {
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return null;
+	}
+
+	@Override
+	public String getUsername() {
 		return customerID;
 	}
 
-	public Long getID() {
-		return id;
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
 	}
 
-	public User(long id, String password, String CustomerID, String TransactionPassword) {
-		super();		
-		this.password = password;
-		this.transactionPassword = TransactionPassword;
-		this.id = id;
-		this.customerID = CustomerID;
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
 	}
 
-	public void setCustomerID(String customerID) {
-		this.customerID = customerID;
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
 	}
 
-	public void setID(Long ID) {
-		id = ID;
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
+	
+	//Default constructor
+	// public User() {
+		
+	// }
+	
+	// //Parameterised
+	
+
+	// public String getCustomerID() {
+	// 	return customerID;
+	// }
+
+	// public String getID() {
+	// 	return id;
+	// }
+
+	// public User(String id, String password, String CustomerID, String TransactionPassword) {
+	// 	super();		
+	// 	this.password = password;
+	// 	this.transactionPassword = TransactionPassword;
+	// 	this.id = id;
+	// 	this.customerID = CustomerID;
+	// }
+
+	// public void setCustomerID(String customerID) {
+	// 	this.customerID = customerID;
+	// }
+
+	// public void setID(String ID) {
+	// 	id = ID;
+	// }
 
 	
 
-	public String getPassword() {
-		return password;
-	}
+	// public String getPassword() {
+	// 	return password;
+	// }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	// public void setPassword(String password) {
+	// 	this.password = password;
+	// }
 
-	public String getTransactionPassword() {
-		return transactionPassword;
-	}
+	// public String getTransactionPassword() {
+	// 	return transactionPassword;
+	// }
 
-	public void setTransactionPassword(String Transactionpassword) {
-		transactionPassword = Transactionpassword;
-	}
+	// public void setTransactionPassword(String Transactionpassword) {
+	// 	transactionPassword = Transactionpassword;
+	// }
 	
 	//getter-setter
 }

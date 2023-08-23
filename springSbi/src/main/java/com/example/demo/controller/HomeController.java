@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
+import java.security.Principal;
+
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 @RestController
 public class HomeController {
@@ -11,4 +13,9 @@ public class HomeController {
     public String home(){
         return "Hello World";
     }    
+
+    @GetMapping("/current-user")
+    public String getLoggedInUser(Principal principal){
+        return principal.getName();
+    }
 }

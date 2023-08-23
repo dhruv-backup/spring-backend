@@ -39,7 +39,7 @@ public class UserController {
 
 	@PostMapping("/login")
 	public String verifyCustomer(@Validated @RequestBody Authentication customer) {
-		User val = customerRepository.findByCustomerID(customer.getCustomerID());
+		User val = customerRepository.findByCustomerID(customer.getCustomerID()).get();
 		if (val.getPassword().equals(customer.getPassword())) {
 			return "1: Credentials Validated Successfully";
 		} else {
@@ -49,7 +49,7 @@ public class UserController {
 
 	@GetMapping("/customer/{cid}")
 	public User getACustomers(@PathVariable(value = "cid") String cid) throws ResourceNotFoundException {
-		return customerRepository.findByCustomerID(cid);
+		return customerRepository.findByCustomerID(cid).get();
 	}
 
 	@PostMapping("/sendCustomer")
@@ -58,7 +58,7 @@ public class UserController {
 	}
 
 	@PutMapping("/updateCustomer/{id}")
-	public ResponseEntity<User> updateCustomer(@PathVariable(value = "id") Long userID,
+	public ResponseEntity<User> updateCustomer(@PathVariable(value = "id") String userID,
 			@Validated @RequestBody User newCustomer) throws ResourceNotFoundException {
 		User updatedCustomer = customerRepository.findById(userID)
 				.orElseThrow(() -> new ResourceNotFoundException("Customer is not avaiable:" + userID));
@@ -70,7 +70,7 @@ public class UserController {
 	}
 
 	@DeleteMapping("/deleteCustomer/{id}")
-	public Map<String, Boolean> deleteCustomer(@PathVariable(value = "id") Long userID)
+	public Map<String, Boolean> deleteCustomer(@PathVariable(value = "id") String userID)
 			throws ResourceNotFoundException {
 		User updatedCustomer = customerRepository.findById(userID)
 				.orElseThrow(() -> new ResourceNotFoundException("Customer is not Available:" + userID));
