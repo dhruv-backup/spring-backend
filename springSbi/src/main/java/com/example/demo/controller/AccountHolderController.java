@@ -83,6 +83,8 @@ public class AccountHolderController {
     public String transferAmount(@PathVariable(value = "ac") String ac,
             @PathVariable(value = "amt") Double amt) {
         AccountHolder details1 = userRepository.findByAccountNo(ac);
+        if(details1==null)
+            throw new ResourceNotFoundException("Account Number is not Available:" + ac);
         if (details1.getMinAccountBalance() < amt)
             return "Insufficient Balance";
         else {
