@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.AccountHolder;
@@ -36,7 +38,6 @@ public class AccountHolderController {
         return userRepository.findAll();
     }
 
-
     @GetMapping("/user/{id}")
     public AccountHolder getACustomers(@PathVariable(value = "id") String userID) throws ResourceNotFoundException {
         return userRepository.findById(userID)
@@ -44,18 +45,26 @@ public class AccountHolderController {
     }
 
     @GetMapping("/user/active/{id}")
-    public List<AccountHolder> getACustomers(@PathVariable(value = "id") Boolean userID) throws ResourceNotFoundException {
+    public List<AccountHolder> getACustomers(@PathVariable(value = "id") Boolean userID)
+            throws ResourceNotFoundException {
         return userRepository.findByisActive(userID);
     }
 
     @GetMapping("/get/user/{cid}")
     public AccountHolder getACustomersbyCID(@PathVariable(value = "cid") String cid) throws ResourceNotFoundException {
-        return userRepository.findByCustomerID(cid);
+        AccountHolder user = userRepository.findByCustomerID(cid);
+        if (user == null)
+            throw new ResourceNotFoundException("User is not Available:" + cid);
+        return user;
     }
 
     @GetMapping("/getbyaccno/{cid}")
     public AccountHolder getACustomerByAccNo(@PathVariable(value = "cid") String cid) throws ResourceNotFoundException {
-        return userRepository.findByAccountNo(cid);
+        AccountHolder user = userRepository.findByAccountNo(cid);
+        if (user == null)
+            throw new ResourceNotFoundException("User is not Available:" + cid);
+        return user;
+        
     }
 
     @PostMapping("/sendUser")
@@ -66,8 +75,14 @@ public class AccountHolderController {
     @PutMapping("/transfer/{ac1}/{ac2}/{amt}")
     public String transferAmount(@PathVariable(value = "ac1") String ac1, @PathVariable(value = "ac2") String ac2,
             @PathVariable(value = "amt") Double amt) {
+        if (amt < 0)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Amount cannot be negative");
         AccountHolder details1 = userRepository.findByAccountNo(ac1);
+        if (details1 == null)
+            throw new ResourceNotFoundException("Account Number is not Available:" + ac1);
         AccountHolder details2 = userRepository.findByAccountNo(ac2);
+        if (details2 == null)
+            throw new ResourceNotFoundException("Account Number is not Available:" + ac2);
         if (details1.getMinAccountBalance() < amt)
             return "Insufficient Balance";
         else {
@@ -82,8 +97,10 @@ public class AccountHolderController {
     @PutMapping("/withdraw/{ac}/{amt}")
     public String transferAmount(@PathVariable(value = "ac") String ac,
             @PathVariable(value = "amt") Double amt) {
+        if (amt < 0)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Amount cannot be negative");
         AccountHolder details1 = userRepository.findByAccountNo(ac);
-        if(details1==null)
+        if (details1 == null)
             throw new ResourceNotFoundException("Account Number is not Available:" + ac);
         if (details1.getMinAccountBalance() < amt)
             return "Insufficient Balance";
