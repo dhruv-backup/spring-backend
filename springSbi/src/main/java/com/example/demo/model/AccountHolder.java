@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 // import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "accountHolders")
@@ -15,43 +16,47 @@ public class AccountHolder {
     @Id
     private String customerID;
 
-    @Column(name = "firstName")
+    @Column(name = "firstName", nullable = false)
     private String firstName;
 
-    @Column(name = "accountNo")
+    @Column(name = "accountNo", nullable = false, unique = true)
     private String accountNo;
 
-    @Column(name = "lastName")
+    @Column(name = "lastName", nullable = false)
     private String lastName;
 
     @Column(name = "middleName")
     private String middleName;
 
-    @Column(name = "currentAddress")
+    @Column(name = "currentAddress", nullable = false)
     private String currentAddress;
 
-    @Column(name = "permanentAddress")
+    @Column(name = "permanentAddress", nullable = false)
     private String permanentAddress;
 
-    @Column(name = "dob")
+    @Column(name = "dob", nullable = false)
     private Date dob;
 
-    @Column(name = "contactNo")
+    @Column(name = "contactNo", nullable = false)
+    @Pattern(regexp = "^[6-9]{1}[0-9]{9}$", message = "Contact number Invalid")
     private String contactNo;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
+    @Pattern(regexp = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$", message = "Email Invalid")
     private String email;
 
-    @Column(name = "aadharNo")
+    @Column(name = "aadharNo", nullable = false, unique = true)
+    @Pattern(regexp = "^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$", message = "Aadhar number Invalid")
     private String aadharNo;
 
-    @Column(name = "panNo")
+    @Column(name = "panNo", nullable = false, unique = true)
+    @Pattern(regexp = "[A-Z]{5}[0-9]{4}[A-Z]{1}", message = "PAN number Invalid")
     private String panNo;
 
-    @Column(name = "occupation")
+    @Column(name = "occupation", nullable = false)
     private String occupation;
 
-    @Column(name = "minAccountBalance")
+    @Column(name = "minAccountBalance", nullable = false)
     private double minAccountBalance;
 
     private boolean isActive;

@@ -44,6 +44,15 @@ public class AccountHolderController {
                 .orElseThrow(() -> new ResourceNotFoundException("User is not Available:" + userID));
     }
 
+    @GetMapping("/exists/{id}")
+    public Boolean whetherExists(@PathVariable(value = "id") String userID) throws ResourceNotFoundException {
+        AccountHolder user = userRepository.findById(userID).get();
+        if (user == null || user.getIsActive() == false)
+            return false;
+        else
+            return true;
+    }
+
     @GetMapping("/user/active/{id}")
     public List<AccountHolder> getACustomers(@PathVariable(value = "id") Boolean userID)
             throws ResourceNotFoundException {
@@ -64,7 +73,7 @@ public class AccountHolderController {
         if (user == null)
             throw new ResourceNotFoundException("User is not Available:" + cid);
         return user;
-        
+
     }
 
     @PostMapping("/sendUser")
