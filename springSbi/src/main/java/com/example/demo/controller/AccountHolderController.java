@@ -53,6 +53,15 @@ public class AccountHolderController {
             return true;
     }
 
+    @GetMapping("/exists/acno/{id}")
+    public Boolean whetherExistsByAccNo(@PathVariable(value = "id") String userID) throws ResourceNotFoundException {
+        AccountHolder user = userRepository.findByAccountNo(userID);
+        if (user == null || user.getIsActive() == false)
+            return false;
+        else
+            return true;
+    }
+
     @GetMapping("/user/active/{id}")
     public List<AccountHolder> getACustomers(@PathVariable(value = "id") Boolean userID)
             throws ResourceNotFoundException {

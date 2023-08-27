@@ -24,7 +24,7 @@ import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Transaction;
 import com.example.demo.repository.TransactionRepository;
 
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:3000/")
 @RestController
 @RequestMapping("/api/v1")
 public class TransactionController {

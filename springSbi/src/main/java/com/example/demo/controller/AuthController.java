@@ -23,8 +23,8 @@ import com.example.demo.model.User;
 import com.example.demo.security.JwtHelper;
 import com.example.demo.service.UserService;
 
-@RestController
 @CrossOrigin("http://localhost:3000")
+@RestController
 @RequestMapping("/auth")
 public class AuthController {
 

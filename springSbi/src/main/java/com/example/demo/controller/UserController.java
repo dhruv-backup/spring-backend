@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,6 +30,8 @@ public class UserController {
 
 	@Autowired
 	private UserRepository customerRepository;
+
+	private PasswordEncoder passwordEncoder;
 
 	// get all customers
 
@@ -64,6 +67,29 @@ public class UserController {
 				.orElseThrow(() -> new ResourceNotFoundException("Customer is not avaiable:" + userID));
 		updatedCustomer.setPassword(newCustomer.getPassword());
 		updatedCustomer.setTransactionPassword(newCustomer.getTransactionPassword());
+		customerRepository.save(updatedCustomer);
+
+		return ResponseEntity.ok(updatedCustomer);
+	}
+
+	@PutMapping("/updatePassword/{id}")
+	public ResponseEntity<User> updateCustomerPassword(@PathVariable(value = "id") String userID,
+			@Validated @RequestBody User newCustomer) throws ResourceNotFoundException {
+		User updatedCustomer = customerRepository.findById(userID)
+				.orElseThrow(() -> new ResourceNotFoundException("Customer is not avaiable:" + userID));
+		updatedCustomer.setPassword(passwordEncoder.encode(newCustomer.getPassword()));
+		updatedCustomer.setTransactionPassword(newCustomer.getTransactionPassword());
+		customerRepository.save(updatedCustomer);
+
+		return ResponseEntity.ok(updatedCustomer);
+	}
+
+	@PutMapping("/resetPassword/{id}")
+	public ResponseEntity<User> resetPassword(@PathVariable(value = "id") String userID,
+			@Validated @RequestBody User newCustomer) throws ResourceNotFoundException {
+		User updatedCustomer = customerRepository.findById(userID)
+				.orElseThrow(() -> new ResourceNotFoundException("Customer is not avaiable:" + userID));
+		updatedCustomer.setPassword(passwordEncoder.encode(newCustomer.getPassword()));
 		customerRepository.save(updatedCustomer);
 
 		return ResponseEntity.ok(updatedCustomer);
