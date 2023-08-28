@@ -36,10 +36,10 @@ public class User implements UserDetails {
 	@Column(name = "customerID", nullable = false, unique = true)
 	private String customerID;
 
-	@Column(name = "password", nullable = false)
+	@Column(name = "password")
 	private String password;
 
-	@Column(name = "transactionPassword", nullable = false)
+	@Column(name = "transactionPassword")
 	private String transactionPassword;
 
 	@Override
@@ -104,13 +104,13 @@ public class User implements UserDetails {
 	// id = ID;
 	// }
 
-	// public String getPassword() {
-	// return password;
-	// }
+	public String getPassword() {
+		return password;
+	}
 
-	// public void setPassword(String password) {
-	// this.password = password;
-	// }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	// public String getTransactionPassword() {
 	// return transactionPassword;

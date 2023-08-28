@@ -66,7 +66,7 @@ public class AccountHolder {
 
     public AccountHolder(String CustomerID, String FirstName, String LastName, String AccountNo , String MiddleName, String CurrentAddress,
             String PermanentAddress, Date DOB, String ContactNo, String Email, String AadharNo, String PanNo,
-            String Occupation, double MinAccountBalance) {
+            String Occupation, double MinAccountBalance, Boolean isActive) {
         super();
         this.customerID = CustomerID;
         this.firstName = FirstName;
@@ -82,7 +82,7 @@ public class AccountHolder {
         this.panNo = PanNo;
         this.occupation = Occupation;
         this.minAccountBalance = MinAccountBalance;
-        this.isActive = false;
+        this.isActive = isActive;
     }
 
     public String getCustomerID() {

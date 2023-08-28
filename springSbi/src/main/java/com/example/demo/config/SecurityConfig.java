@@ -47,7 +47,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/resetPassword/**").permitAll()
                         .requestMatchers("/api/v1/updatePassword/**").permitAll()
                         .requestMatchers("/api/v1/getbyaccno/**").permitAll()
-                        .requestMatchers("api/v1/user/active/false").permitAll()
+                        .requestMatchers("/api/v1/user/active/false").permitAll()
                         .anyRequest()
                         .authenticated())
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(point))

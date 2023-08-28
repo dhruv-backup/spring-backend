@@ -31,6 +31,7 @@ public class UserController {
 	@Autowired
 	private UserRepository customerRepository;
 
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	// get all customers
@@ -75,8 +76,10 @@ public class UserController {
 	@PutMapping("/updatePassword/{id}")
 	public ResponseEntity<User> updateCustomerPassword(@PathVariable(value = "id") String userID,
 			@Validated @RequestBody User newCustomer) throws ResourceNotFoundException {
-		User updatedCustomer = customerRepository.findById(userID)
-				.orElseThrow(() -> new ResourceNotFoundException("Customer is not avaiable:" + userID));
+		User updatedCustomer = customerRepository.findByCustomerID(userID).get();
+		if (updatedCustomer == null) {
+			throw new ResourceNotFoundException("Customer is not avaiable:" + userID);
+		}
 		updatedCustomer.setPassword(passwordEncoder.encode(newCustomer.getPassword()));
 		updatedCustomer.setTransactionPassword(newCustomer.getTransactionPassword());
 		customerRepository.save(updatedCustomer);
@@ -87,8 +90,11 @@ public class UserController {
 	@PutMapping("/resetPassword/{id}")
 	public ResponseEntity<User> resetPassword(@PathVariable(value = "id") String userID,
 			@Validated @RequestBody User newCustomer) throws ResourceNotFoundException {
-		User updatedCustomer = customerRepository.findById(userID)
-				.orElseThrow(() -> new ResourceNotFoundException("Customer is not avaiable:" + userID));
+		User updatedCustomer = customerRepository.findByCustomerID(userID).get();
+		// System.out.println("PPPPPPPPPPPPPPPPPPPPPPPPP" + newCustomer.getPassword());
+		if (updatedCustomer == null) {
+			throw new ResourceNotFoundException("Customer is not avaiable:" + userID);
+		}
 		updatedCustomer.setPassword(passwordEncoder.encode(newCustomer.getPassword()));
 		customerRepository.save(updatedCustomer);
 
