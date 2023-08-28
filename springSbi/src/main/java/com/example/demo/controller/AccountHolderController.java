@@ -134,18 +134,10 @@ public class AccountHolderController {
             @Validated @RequestBody AccountHolder newUser) throws ResourceNotFoundException {
         AccountHolder updatedCustomer = userRepository.findById(userID)
                 .orElseThrow(() -> new ResourceNotFoundException("User is not avaiable:" + userID));
-        updatedCustomer.setFirstName(newUser.getFirstName());
-        updatedCustomer.setMiddleName(newUser.getMiddleName());
-        updatedCustomer.setLastName(newUser.getLastName());
-        updatedCustomer.setAccountNo(newUser.getAccountNo());
         updatedCustomer.setCurrentAddress(newUser.getCurrentAddress());
         updatedCustomer.setPermanentAddress(newUser.getPermanentAddress());
         updatedCustomer.setOccupation(newUser.getOccupation());
-        updatedCustomer.setMinAccountBalance(newUser.getMinAccountBalance());
         updatedCustomer.setContactNo(newUser.getContactNo());
-        updatedCustomer.setAadharNo(newUser.getAadharNo());
-        updatedCustomer.setPanNo(newUser.getPanNo());
-        updatedCustomer.setDOB(newUser.getDOB());
         userRepository.save(updatedCustomer);
 
         return ResponseEntity.ok(updatedCustomer);
