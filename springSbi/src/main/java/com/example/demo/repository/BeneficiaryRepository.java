@@ -8,9 +8,10 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.model.Beneficiary;
 
 @Repository
-public interface BeneficiaryRepository extends JpaRepository<Beneficiary,String> {
+public interface BeneficiaryRepository extends JpaRepository<Beneficiary,Long> {
     public List<Beneficiary> findByAccountNo(String accountNo);
     public List<Beneficiary> findByReceiverAccNo(String receiverAccNo);
+    public Beneficiary findByAccountNoAndReceiverAccNo(String accountNo,String receiverAccNo);
     public List<Beneficiary> findByNickname(String nickname);
     public List<Beneficiary> findByName(String name);
 }

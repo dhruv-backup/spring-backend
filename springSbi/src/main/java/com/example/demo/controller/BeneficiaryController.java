@@ -48,7 +48,7 @@ public class BeneficiaryController {
 	}
 
 	@PutMapping("/updateBeneficiary/{id}")
-	public ResponseEntity<Beneficiary> updateBeneficiary(@PathVariable(value = "id") String userID,
+	public ResponseEntity<Beneficiary> updateBeneficiary(@PathVariable(value = "id") Long userID,
 			@Validated @RequestBody Beneficiary newBeneficiary) throws ResourceNotFoundException {
 		Beneficiary updatedBeneficiary = beneficiaryRepository.findById(userID)
 				.orElseThrow(() -> new ResourceNotFoundException("Beneficiary is not avaiable:" + userID));
@@ -60,8 +60,14 @@ public class BeneficiaryController {
 		return ResponseEntity.ok(updatedBeneficiary);
 	}
 
+	@GetMapping("beneficiary/{sid}/{rid}")
+	public Beneficiary getBeneficiaryByAccountNo(@PathVariable(value = "sid") String sid,
+			@PathVariable(value = "rid") String rid) throws ResourceNotFoundException {
+		return beneficiaryRepository.findByAccountNoAndReceiverAccNo(sid, rid);
+	}
+
 	@DeleteMapping("/deleteBeneficiary/{id}")
-	public Map<String, Boolean> deleteBeneficiary(@PathVariable(value = "id") String userID)
+	public Map<String, Boolean> deleteBeneficiary(@PathVariable(value = "id") Long userID)
 			throws ResourceNotFoundException {
 		Beneficiary updatedBeneficiary = beneficiaryRepository.findById(userID)
 				.orElseThrow(() -> new ResourceNotFoundException("Beneficiary is not Available:" + userID));

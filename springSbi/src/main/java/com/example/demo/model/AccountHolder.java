@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "accountHolders")
@@ -20,6 +21,7 @@ public class AccountHolder {
     private String firstName;
 
     @Column(name = "accountNo", nullable = false, unique = true)
+    @Size(min = 12, max = 12, message = "Account number Invalid")
     private String accountNo;
 
     @Column(name = "lastName", nullable = false)
