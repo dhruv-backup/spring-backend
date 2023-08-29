@@ -37,10 +37,10 @@ public class User implements UserDetails {
 	@Column(name = "customerID", nullable = false, unique = true)
 	private String customerID;
 
-	@Column(name = "password")
+	@Column(name = "password", nullable = false )
 	private String password;
 
-	@Column(name = "transactionPassword")
+	@Column(name = "transactionPassword", nullable = false)
 	private String transactionPassword;
 
 	@Override
